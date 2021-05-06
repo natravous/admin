@@ -1,3 +1,7 @@
+*{
+    box-shadow: none;
+}
+
 body{
     background-color: #EEEEEE
 }
@@ -41,4 +45,14 @@ body{
 .card .card-image .card-title.pgn{
     right: 0;
     left: none;
+}
+
+.card .card-image img{
+    position: absolute;
+}
+
+.card .card-image{
+    position: relative;
+    padding-top: 5%;
+    overflow: hidden;
 }
