@@ -72,3 +72,14 @@ body{
 .mbuh{
     padding-bottom: 1rem;
 }
+.search{
+    width: 40%;
+}
+.search .material-icons{
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.input-field input[type="search"] + .label-icon {
+    left: 0rem;
+}
