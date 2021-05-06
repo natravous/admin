@@ -1,0 +1,44 @@
+body{
+    background-color: #EEEEEE
+}
+
+.blue{
+    background-color: #2699FB;
+}
+
+.white{
+    background-color: #FFFFFF;
+}
+
+.bluish{
+    background-color:#7FC4FD;
+}
+/* #EEEEEE,  #7FC4FD, #95989A, #2699FB*/
+
+.atas-tombol{
+    position: relative;
+    width: 70%;
+    margin: auto;
+}
+
+.add{
+    position: absolute;
+    right: 0;
+    margin: 10px;
+}
+
+.container90{
+    width: 90%;
+    margin: 5%;
+    margin-top: 10%
+}
+
+.card .card-action .pinggir{
+    float: right;
+    margin: 0;
+}
+
+.card .card-image .card-title.pgn{
+    right: 0;
+    left: none;
+}
