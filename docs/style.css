@@ -28,10 +28,10 @@ body{
 /* #EEEEEE,  #7FC4FD, #95989A, #2699FB*/
 
 .atas-tombol{
-    position: sticky;
+    position: fixed;
     width: 70%;
-    /* margin: auto; */
-    float: right;
+    right: 5vw;
+    bottom: 15vh;
 }
 
 .add{
