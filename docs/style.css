@@ -1,5 +1,13 @@
 *{
-    box-shadow: none;
+    
+}
+
+.no-shadow{
+    box-shadow: unset;
+}
+
+.no-border{
+    border: 0;
 }
 
 body{
@@ -20,9 +28,10 @@ body{
 /* #EEEEEE,  #7FC4FD, #95989A, #2699FB*/
 
 .atas-tombol{
-    position: relative;
+    position: sticky;
     width: 70%;
-    margin: auto;
+    /* margin: auto; */
+    float: right;
 }
 
 .add{
@@ -34,7 +43,8 @@ body{
 .container90{
     width: 90%;
     margin: 5%;
-    margin-top: 10%
+    margin-top: 5rem;
+    padding-top: 1.5rem;
 }
 
 .card .card-action .pinggir{
@@ -49,10 +59,16 @@ body{
 
 .card .card-image img{
     position: absolute;
+    width: 100%;
+    height: 100%;
 }
 
 .card .card-image{
     position: relative;
-    padding-top: 5%;
+    padding-top: 75%;
     overflow: hidden;
+}
+
+.container{
+    padding-bottom: 1rem;
 }
