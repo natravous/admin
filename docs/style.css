@@ -27,6 +27,7 @@ body{
 }
 /* #EEEEEE,  #7FC4FD, #95989A, #2699FB*/
 
+/* navbar */
 nav .brand-logo{
     font-size: 1.5rem;
 }
@@ -44,6 +45,7 @@ nav .brand-logo{
     margin: 10px;
 }
 
+/* card */
 .container90{
     width: 90%;
     margin: auto;
@@ -79,18 +81,27 @@ nav .brand-logo{
     overflow: hidden;
 }
 
-.mbuh{
+.pd-btm{
     padding-bottom: 1rem;
 }
+
+/* search bar */
 .search{
-    width: 35%;
+    width: 50%;
     height: 7vh;
 }
+
 .search .material-icons{
     padding-left: 1rem;
     padding-right: 1rem;
     height: 7vh;
     line-height: 7vh;
+}
+
+@media only screen and (max-width: 768px) {
+    .search{
+        width: 100%;
+    }
 }
 
 .input-field input[type="search"] + .label-icon {
