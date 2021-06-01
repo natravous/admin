@@ -29,6 +29,9 @@ body{
 .bluish{
     background-color:#7FC4FD;
 }
+.abu{
+    color: #95989A;
+}
 /* #EEEEEE,  #7FC4FD, #95989A, #2699FB*/
 
 /* navbar */
@@ -106,16 +109,51 @@ nav .brand-logo{
 /* add page */
 .judulpage{
     text-align: center;
-    margin-top: 50px;
+    padding-top: 50px;
     font-weight: bold;
     font-size: 32px;
     color: #2699FB;
+    margin: 0;
+
 }
 
 .row .col.s6{
     width: 100%;
 }
 
+/* table page */
+.judultable{
+    text-align: center;
+    padding: 40px 0;
+    font-weight: bold;
+    font-size: 32px;
+    margin: 0;
+}
+
+table thead tr th, table tbody tr td{
+    text-align: center;
+}
+
+table thead tr th{
+    color: white;
+}
+
+.rowtable{
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 100px;
+}
+
+/* pagination */
+ul.paginasi{
+    padding: 1.5rem;
+    margin: auto;
+    float: right;
+}
+
+.pagination li.active{
+    background-color: #2699FB;
+}
 @media only screen and (max-width: 768px) {
     .search{
         width: 100%;
