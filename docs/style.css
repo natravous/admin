@@ -154,6 +154,12 @@ ul.paginasi{
 .pagination li.active{
     background-color: #2699FB;
 }
+
+/* chart page */
+.cntnr{
+    width: 90%;
+}
+
 @media only screen and (max-width: 768px) {
     .search{
         width: 100%;
