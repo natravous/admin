@@ -75,7 +75,8 @@ const kirim = () => {
                 iden: date,
                 nama: document.getElementById("nama").value,
                 harga: document.getElementById("harga").value,
-                deskripsi: document.getElementById("deskripsi").value}
+                deskripsi: document.getElementById("deskripsi").value
+            }
             console.log(upl)
                 database.ref(`/makanan/${date}`).set(upl).then(()=>{
                     M.toast({html: 'Upload Berhasil', classes:'blue'})
@@ -114,7 +115,7 @@ const fetchData = ()=>{
                             </div>
                             <div class="card-action">
                                 <a class="waves-effect waves-light modal-trigger" href="#modal1" onclick="edit(${key})">EDIT</a>
-                                <a id="del" class="pinggir"  onclick="hapus(${key, f})">DELETE</a>
+                                <a id="del" class="pinggir"  onclick="hapus(${key}, '${f}')">DELETE</a>
                             </div>
                         </div>
                     </div>`;
