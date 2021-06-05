@@ -76,46 +76,52 @@ const kirim = () => {
             nama: document.getElementById("nama").value,
             harga: document.getElementById("harga").value,
             deskripsi: document.getElementById("deskripsi").value}
-          
-            database.ref(`/makanan/${date}`).set(upl)
-      });
-      M.toast({html: 'Upload Berhasil', classes:'bg-contain1'})
+          console.log(upl)
+            database.ref(`/makanan/${date}`).set(upl).then(()=>{
+                M.toast({html: 'Upload Berhasil', classes:'blue'})
+                window.open("/","_self");
+              })
+      })
+      
   })
   }
 
 
 //read
-database.ref("/makanan").on("value", (dtman)=>{
-let tampil = dtman.val();
-var card = document.getElementById("card-menu");
-let dataht = "";
-// var kunci = document.getElementById("identitas").value = dtman.val().iden;
-for(key in tampil){
-    let a = tampil[key].nama;
-    let b = rupiah(tampil[key].harga);
-    let c = tampil[key].deskripsi;
-    let d = tampil[key].iden;
-    let e = tampil[key].urlImg;
-    dataht += `<div class="col l4 s12 m6">
-                <div class="card">
-                    <div class="card-image bluish">
-                        <img src="${e}">
-                        <span class="card-title pgn right-align">Rp. ${b}</span>
-                    </div>
-                    <div class="card-content">
-                        <span class="card-title">${a}</span>
-                        <p>${c}</p>
-                    </div>
-                    <div class="card-action">
-                        <a class="waves-effect waves-light modal-trigger" href="#modal1" onclick="edit(${key})">EDIT</a>
-                        <a id="del" class="pinggir"  onclick="hapus(${key})">DELETE</a>
-                    </div>
-                </div>
-            </div>`;
-    console.log(card);
+//assign this to a function, so this function only can be triggered at spesific page
+const fetchData = ()=>{
+    database.ref("/makanan").on("value", (dtman)=>{
+        let tampil = dtman.val();
+        var card = document.getElementById("card-menu");
+        let dataht = "";
+        // var kunci = document.getElementById("identitas").value = dtman.val().iden;
+        for(key in tampil){
+            let a = tampil[key].nama;
+            let b = rupiah(tampil[key].harga);
+            let c = tampil[key].deskripsi;
+            let d = tampil[key].iden;
+            let e = tampil[key].urlImg;
+            dataht += `<div class="col l4 s12 m6">
+                        <div class="card">
+                            <div class="card-image bluish">
+                                <img src="${e}">
+                                <span class="card-title pgn right-align">Rp. ${b}</span>
+                            </div>
+                            <div class="card-content">
+                                <span class="card-title">${a}</span>
+                                <p>${c}</p>
+                            </div>
+                            <div class="card-action">
+                                <a class="waves-effect waves-light modal-trigger" href="#modal1" onclick="edit(${key})">EDIT</a>
+                                <a id="del" class="pinggir"  onclick="hapus(${key})">DELETE</a>
+                            </div>
+                        </div>
+                    </div>`;
+            console.log(card);
+        }
+        card.innerHTML = dataht
+  })        
 }
-card.innerHTML = dataht
-})
 
 //delete
 function hapus(key){
