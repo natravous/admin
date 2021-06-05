@@ -88,22 +88,20 @@ var firebaseConfig = {
     
         
     //   });
-        document.getElementById("tombolEdit").onclick()=
+        document.getElementById("editNow").innerHTML = key;
       console.log(key);
   
     });
   }
   
-  function tombolEdit(key){
-
+  function tombolEdit(){
+    let key = document.getElementById("editNow").innerHTML;
     database.ref(`/makanan/${key}`).update({
       iden: key,
       nama: document.getElementById("nama").value,
       harga: document.getElementById("harga").value,
       deskripsi: document.getElementById("deskripsi").value
-  
-      
-    });
+    }).then(document.getElementById("editNow").innerHTML = "");
   }
   
   //login
