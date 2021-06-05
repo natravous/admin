@@ -82,7 +82,7 @@ for(key in tampil){
                     </div>
                     <div class="card-action">
                         <a class="waves-effect waves-light modal-trigger" href="#modal1" onclick="edit(${key})">EDIT</a>
-                        <a class="pinggir"  onclick="hapus(${key})">DELETE</a>
+                        <a id="del" class="pinggir"  onclick="hapus(${key})">DELETE</a>
                     </div>
                 </div>
             </div>`;

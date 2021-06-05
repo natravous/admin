@@ -75,6 +75,14 @@ nav .brand-logo{
     cursor: pointer;
 }
 
+/* .card .card-action a:not(:nth-child(1)){
+    margin-right: 0;
+} */
+
+#del{
+    margin-right: 0;
+}
+
 .card .card-image .card-title.pgn{
     right: 0;
     left: none;
