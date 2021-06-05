@@ -67,23 +67,23 @@ const kirim = () => {
     let nameFile = `${date}-${file.name}`;
 
     var up = storage.ref("product").child(nameFile).put(file);
-    up.on('state_changed', snapshot => {
-  }, error => { console.log(error) }, () => {
-      up.snapshot.ref.getDownloadURL().then(downloadURL => {
-          let upl = {
-            urlImg : downloadURL,
-            iden: date,
-            nama: document.getElementById("nama").value,
-            harga: document.getElementById("harga").value,
-            deskripsi: document.getElementById("deskripsi").value}
-          console.log(upl)
-            database.ref(`/makanan/${date}`).set(upl).then(()=>{
-                M.toast({html: 'Upload Berhasil', classes:'blue'})
-                window.open("/","_self");
-              })
-      })
+    up.on('state_changed', snapshot => {}, error => { console.log(error) }, () => {
+        up.snapshot.ref.getDownloadURL().then(downloadURL => {
+            let upl = {
+                urlImg : downloadURL,
+                docName: nameFile,
+                iden: date,
+                nama: document.getElementById("nama").value,
+                harga: document.getElementById("harga").value,
+                deskripsi: document.getElementById("deskripsi").value}
+            console.log(upl)
+                database.ref(`/makanan/${date}`).set(upl).then(()=>{
+                    M.toast({html: 'Upload Berhasil', classes:'blue'})
+                    window.open("/admin/docs/index.html","_self");
+                })
+        })
       
-  })
+    })
   }
 
 
@@ -101,6 +101,7 @@ const fetchData = ()=>{
             let c = tampil[key].deskripsi;
             let d = tampil[key].iden;
             let e = tampil[key].urlImg;
+            let f = tampil[key].docName;
             dataht += `<div class="col l4 s12 m6">
                         <div class="card">
                             <div class="card-image bluish">
@@ -113,7 +114,7 @@ const fetchData = ()=>{
                             </div>
                             <div class="card-action">
                                 <a class="waves-effect waves-light modal-trigger" href="#modal1" onclick="edit(${key})">EDIT</a>
-                                <a id="del" class="pinggir"  onclick="hapus(${key})">DELETE</a>
+                                <a id="del" class="pinggir"  onclick="hapus(${key, f})">DELETE</a>
                             </div>
                         </div>
                     </div>`;
@@ -124,28 +125,21 @@ const fetchData = ()=>{
 }
 
 //delete
-function hapus(key){
-database.ref("/makanan/"+key).remove();
+function hapus(key, nameFile){
+
+    database.ref("/makanan/"+key).remove();
+    storage.ref("product").child(nameFile).delete();
 }
 // database.ref("/makanan").remove();
 
 //edit data
 function edit(key){
 database.ref("/makanan/"+key).on("value", (datae)=>{
-//   let tampl = datae.val();
+  let tampl = datae.val();
     
-    document.getElementById("nama").value = datae.val().nama;
-    document.getElementById("harga").value = datae.val().harga;
-    document.getElementById("deskripsi").value = datae.val().deskripsi;
-    
-//   database.ref(`/makanan/${key}`).update({
-//     iden: key,
-//     nama: document.getElementById("nama").value,
-//     harga: document.getElementById("harga").value,
-//     deskripsi: document.getElementById("deskripsi").value
-
-    
-//   });
+    document.getElementById("nama").value = tampl.nama;
+    document.getElementById("harga").value = tampl.harga;
+    document.getElementById("deskripsi").value = tampl.deskripsi;
 
     //untuk menyimpan  key sementara
     document.getElementById("editNow").innerHTML = key;
