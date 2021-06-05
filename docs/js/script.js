@@ -28,14 +28,11 @@ var firebaseConfig = {
   //write
   function kirim(){
     var date = new Date().getTime();
-    database.ref(`/makanan/${date}`).set({
-      iden: document.getElementById("identitas").value,
-      nama: document.getElementById("nama").value,
-      harga: document.getElementById("harga").value,
-      deskripsi: document.getElementById("deskripsi").value
-  
-      
-    });
+    var data = {iden: date,
+    nama: document.getElementById("nama").value,
+    harga: document.getElementById("harga").value,
+    deskripsi: document.getElementById("deskripsi").value}
+    database.ref(`/makanan/${date}`).set(data).then(console.log('kirimed'))
   }
   
   //read
