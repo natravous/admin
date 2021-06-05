@@ -57,7 +57,7 @@ var firebaseConfig = {
                             <p>${c}</p>
                         </div>
                         <div class="card-action">
-                            <a href="edit_page.html" onclick="edit(${key})">EDIT</a>
+                            <a class="waves-effect waves-light btn modal-trigger" href="#modal1" onclick="edit(${key})">EDIT</a>
                             <a class="pinggir"  onclick="hapus(${key})">DELETE</a>
                         </div>
                     </div>
@@ -74,29 +74,30 @@ var firebaseConfig = {
   
   function edit(key){
     database.ref("/makanan/"+key).on("value", (datae)=>{
-      let tampl = datae.val();
-      document.getElementById("identitas").value = datae.val().iden;
+    //   let tampl = datae.val();
+        
       document.getElementById("nama").value = datae.val().nama;
       document.getElementById("harga").value = datae.val().harga;
       document.getElementById("deskripsi").value = datae.val().deskripsi;
       
-      database.ref(`/makanan/${key}`).update({
-        iden: document.getElementById("identitas").value,
-        nama: document.getElementById("nama").value,
-        harga: document.getElementById("harga").value,
-        deskripsi: document.getElementById("deskripsi").value
+    //   database.ref(`/makanan/${key}`).update({
+    //     iden: key,
+    //     nama: document.getElementById("nama").value,
+    //     harga: document.getElementById("harga").value,
+    //     deskripsi: document.getElementById("deskripsi").value
     
         
-      });
-  
+    //   });
+        document.getElementById("tombolEdit").onclick()=
       console.log(key);
   
     });
   }
   
-  function tombolEdit(){
+  function tombolEdit(key){
+
     database.ref(`/makanan/${key}`).update({
-      iden: document.getElementById("identitas").value,
+      iden: key,
       nama: document.getElementById("nama").value,
       harga: document.getElementById("harga").value,
       deskripsi: document.getElementById("deskripsi").value
