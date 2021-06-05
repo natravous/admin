@@ -50,14 +50,39 @@ const reverseString = (str)=> {
 
 
 //write
-function kirim(){
-var date = new Date().getTime();
-var data = {iden: date,
-nama: document.getElementById("nama").value,
-harga: document.getElementById("harga").value,
-deskripsi: document.getElementById("deskripsi").value}
-database.ref(`/makanan/${date}`).set(data).then(console.log('kirimed'))
-}
+// function kirim(){
+// var date = new Date().getTime();
+// var data = {iden: date,
+// nama: document.getElementById("nama").value,
+// harga: document.getElementById("harga").value,
+// deskripsi: document.getElementById("deskripsi").value}
+// database.ref(`/makanan/${date}`).set(data).then(console.log('kirimed'))
+// }
+
+
+const kirim = () => {
+    let file = document.getElementById("file-image");
+    var date = new Date().getTime();
+    file = file.files[0];
+    let nameFile = `${date}-${file.name}`;
+
+    var up = storage.ref("product").child(nameFile).put(file);
+    up.on('state_changed', snapshot => {
+  }, error => { console.log(error) }, () => {
+      up.snapshot.ref.getDownloadURL().then(downloadURL => {
+          let upl = {
+            urlImg : downloadURL,
+            iden: date,
+            nama: document.getElementById("nama").value,
+            harga: document.getElementById("harga").value,
+            deskripsi: document.getElementById("deskripsi").value}
+          
+            database.ref(`/makanan/${date}`).set(upl)
+      });
+      M.toast({html: 'Upload Berhasil', classes:'bg-contain1'})
+  })
+  }
+
 
 //read
 database.ref("/makanan").on("value", (dtman)=>{
@@ -70,10 +95,11 @@ for(key in tampil){
     let b = rupiah(tampil[key].harga);
     let c = tampil[key].deskripsi;
     let d = tampil[key].iden;
+    let e = tampil[key].urlImg;
     dataht += `<div class="col l4 s12 m6">
                 <div class="card">
                     <div class="card-image bluish">
-                        <img src="">
+                        <img src="${e}">
                         <span class="card-title pgn right-align">Rp. ${b}</span>
                     </div>
                     <div class="card-content">
@@ -169,3 +195,4 @@ firebase.auth().signOut().then(success =>{
 })
 
 }
+
