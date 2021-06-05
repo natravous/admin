@@ -68,6 +68,7 @@ nav .brand-logo{
 .card .card-action .pinggir{
     float: right;
     margin: 0;
+    cursor: pointer;
 }
 
 .card .card-image .card-title.pgn{
