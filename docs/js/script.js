@@ -80,8 +80,8 @@ const kirim = () => {
             console.log(upl)
                 database.ref(`/makanan/${date}`).set(upl).then(()=>{
                     M.toast({html: 'Upload Berhasil', classes:'blue'})
-                    window.open("/admin/docs/index.html","_self");
-                })
+                    window.open("/","_self");
+                }) //admin/docs/index.html
         })
       
     })
