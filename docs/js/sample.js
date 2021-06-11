@@ -3,9 +3,15 @@ document.addEventListener('DOMContentLoaded', function() {
     var instancesSideNav = M.Sidenav.init(sidenav, {});
     var modal = document.querySelectorAll('.modal');
     var instancesModal = M.Modal.init(modal, {opacity: 0.3});
+
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems, {});
 });
 
-
+// document.addEventListener('DOMContentLoaded', function() {
+//     var elems = document.querySelectorAll('select');
+//     var instances = M.FormSelect.init(elems, options);
+//   });
 
 
 

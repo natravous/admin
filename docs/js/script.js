@@ -65,6 +65,7 @@ const kirim = () => {
     var date = new Date().getTime();
     file = file.files[0];
     let nameFile = `${date}-${file.name}`;
+    let kat = document.getElementById("kategori").value.split(',');
 
     var up = storage.ref("product").child(nameFile).put(file);
     up.on('state_changed', snapshot => {}, error => { console.log(error) }, () => {
@@ -75,10 +76,11 @@ const kirim = () => {
                 iden: date,
                 nama: document.getElementById("nama").value,
                 harga: document.getElementById("harga").value,
+                kategori: kat,
                 deskripsi: document.getElementById("deskripsi").value
             }
             console.log(upl)
-                database.ref(`/makanan/${date}`).set(upl).then(()=>{
+                database.ref(`/admin/menu/${date}`).set(upl).then(()=>{
                     M.toast({html: 'Upload Berhasil', classes:'blue'})
                     window.open("/admin","_self");
                 }) //admin/docs/index.html
@@ -91,7 +93,7 @@ const kirim = () => {
 //read
 //assign this to a function, so this function only can be triggered at spesific page
 const fetchData = ()=>{
-    database.ref("/makanan").on("value", (dtman)=>{
+    database.ref("/admin/menu").on("value", (dtman)=>{
         let tampil = dtman.val();
         var card = document.getElementById("card-menu");
         let dataht = "";
@@ -128,20 +130,20 @@ const fetchData = ()=>{
 //delete
 function hapus(key, nameFile){
 
-    database.ref("/makanan/"+key).remove();
+    database.ref("/admin/menu/"+key).remove();
     storage.ref("product").child(nameFile).delete();
 }
 // database.ref("/makanan").remove();
 
 //edit data
 function edit(key){
-database.ref("/makanan/"+key).on("value", (datae)=>{
+database.ref("/admin/menu/"+key).on("value", (datae)=>{
   let tampl = datae.val();
     
     document.getElementById("nama").value = tampl.nama;
     document.getElementById("harga").value = tampl.harga;
     document.getElementById("deskripsi").value = tampl.deskripsi;
-
+    document.getElementById("kategori").value = tampl.kategori;
     //untuk menyimpan  key sementara
     document.getElementById("editNow").innerHTML = key;
     console.log(key);
@@ -152,10 +154,12 @@ database.ref("/makanan/"+key).on("value", (datae)=>{
 //trigger edit data
 function tombolEdit(){
 let key = document.getElementById("editNow").innerHTML;
-database.ref(`/makanan/${key}`).update({
+let kat = document.getElementById("kategori").value.split(',');
+database.ref(`/admin/menu/${key}`).update({
     iden: key,
     nama: document.getElementById("nama").value,
     harga: document.getElementById("harga").value,
+    kategori: kat,
     deskripsi: document.getElementById("deskripsi").value
 }).then(document.getElementById("editNow").innerHTML = "");
 }
@@ -168,9 +172,11 @@ firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION).then(() =
     return firebase.auth().signInWithEmailAndPassword(email, password)
     .then(success => {
     console.log("Hey");
+    window.open("/admin/docs/index.html","_self");
     })
     .catch(error => {
     console.log("Gagal");
+    window.alert("Email atau password yang dimasukkan salah!");
     })
 }).catch(error => {
     console.log(error.message);
@@ -191,9 +197,79 @@ firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION).then(() =
 
 //logout
 function logout(){
-firebase.auth().signOut().then(success =>{
-    console.log("logout");
-})
+    firebase.auth().signOut().then(success =>{
+        console.log("logout");
+        window.open("/admin/docs/login.html","_self");
+    })
+}
+
+
+// client
+const clientPesanan = ()=>{
+    var date = new Date();
+    let tanggal = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+
+
+    database.ref(`/client/${tanggal}/pesanan/`).set();
+}
+
+
+const clientLogin = ()=>{
+    var date = new Date();
+    let namaClient = document.getElementById("nama-client").value;
+    let noMeja = document.getElementById("meja-client").value;
+    let iden = `${date.getTime()}-${noMeja}`;
+    let tanggal = `${date.getFullYear()}-${date.getMonth}-${date.getDate}`;
+
+    database.ref(`/client/${tanggal}/${iden}/pesanan/`).set(
+        {
+            id: iden,
+            meja: noMeja,
+            nama: namaClient,
+            pesanan: {}, // banyanya id menu, harga
+            total: 0, // harga
+            status: 1
+        }
+
+    ).then(window.open("/..","_self"));
 
 }
 
+
+
+
+//read
+//assign this to a function, so this function only can be triggered at spesific page
+const fetchDataClient = ()=>{
+    database.ref("/admin/menu").on("value", (dtman)=>{
+        let tampil = dtman.val();
+        var card = document.getElementById("card-menu-client");
+        let dataht = "";
+        // var kunci = document.getElementById("identitas").value = dtman.val().iden;
+        for(key in tampil){
+            let a = tampil[key].nama;
+            let b = rupiah(tampil[key].harga);
+            let c = tampil[key].deskripsi;
+            let d = tampil[key].iden;
+            let e = tampil[key].urlImg;
+            let f = tampil[key].docName;
+            dataht += `<div class="col l4 s12 m6">
+                        <div class="card">
+                            <div class="card-image bluish">
+                                <img src="${e}">
+                                <span class="card-title pgn right-align">Rp. ${b}</span>
+                            </div>
+                            <div class="card-content">
+                                <span class="card-title">${a}</span>
+                                <p>${c}</p>
+                            </div>
+                            <div class="card-action">
+                                <a class="waves-effect waves-light modal-trigger" href="#modal1" onclick="">Pesan</a>
+                            </div>
+                        </div>
+                    </div>`;
+            console.log(card);
+        }
+        card.innerHTML = dataht
+  })        
+}
