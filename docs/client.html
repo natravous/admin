@@ -20,7 +20,7 @@
         <header>
             <nav class="blue no-shadow">
                 <div class="nav-wrapper container">
-                    <a href="#" class="brand-logo">Admin</a>
+                    <!-- <a href="#" class="brand-logo">Admin</a> -->
                     <a href="#" data-target="mobile-demo" class="sidenav-trigger">
                         <i class="material-icons">menu</i></a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -48,9 +48,9 @@
             
             <!-- floating button -->
             <div class="fixed-action-btn">
-                <a class="btn-floating btn-large blue" href="add_page.html">
+                <a class="btn-floating btn-large blue modal-trigger" href="#chart">
                 <!-- <i class="large material-icons">mode_edit</i> -->
-                <i class="material-icons">add</i>
+                <i class="material-icons">add_shopping_cart</i>
                 </a>
             </div>
                     
@@ -58,6 +58,7 @@
             <div class="container">
                 <!-- Modal Trigger -->
                 <!-- <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a> -->
+                
                 <!-- search bar -->
                 <div class="section">
                     <nav class="white no-shadow search">
@@ -129,62 +130,36 @@
                         </div>
                     </div>
                 </div>
-<!-- 
-                <div class="col l4 s12 m6">
-                    <div class="card">
-                        <div class="card-image bluish">
-                            <img src="">
-                            <span class="card-title pgn right-align">Rp. 0.000,00</span>
-                        </div>
-                        <div class="card-content">
-                            <span class="card-title">Name</span>
-                            <p>I am a very simple card. I am good at containing small bits of information.
-                            I am convenient because I require little markup to use effectively.</p>
-                        </div>
-                        <div class="card-action">
-                            <a href="#">EDIT</a>
-                            <a class="pinggir" href="#">DELETE</a>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col l4 s12 m6">
-                    <div class="card">
-                        <div class="card-image bluish">
-                            <img src="">
-                            <span class="card-title pgn right-align">Rp. 0.000,00</span>
-                        </div>
-                        <div class="card-content">
-                            <span class="card-title">Name</span>
-                            <p>I am a very simple card. I am good at containing small bits of information.
-                            I am convenient because I require little markup to use effectively.</p>
-                        </div>
-                        <div class="card-action">
-                            <a href="#">EDIT</a>
-                            <a class="pinggir" href="#">DELETE</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col l4 s12 m6">
-                    <div class="card">
-                        <div class="card-image bluish">
-                            <img src="">
-                            <span class="card-title pgn right-align">Rp. 0.000,00</span>
-                        </div>
-                        <div class="card-content">
-                            <span class="card-title">Name</span>
-                            <p>I am a very simple card. I am good at containing small bits of information.
-                            I am convenient because I require little markup to use effectively.</p>
-                        </div>
-                        <div class="card-action">
-                            <a href="#">EDIT</a>
-                            <a class="pinggir" href="#">DELETE</a>
-                        </div>
-                    </div>
-                </div> -->
 
             </div>
+            </div>
+
+
+            <!-- Modal Structure -->
+            <div id="chart" class="modal modal-fixed-footer">
+                <div class="modal-content">
+                <h4>Daftar Pesanan</h4>
+                <div class="container">
+                    <div class="row">
+                        <div class="col m5" style="background: url(/admin/docs/images/cut19_worldend-600x401.jpg); background-size: cover; height: 150px;">
+                            <!-- <img src="/admin/docs/images/cut19_worldend-600x401.jpg" alt=""> -->
+                        </div>
+                        <div class="col m4">
+                            <p>nama</p>
+                            <p>deskripsi</p>
+                            <p>harga</p>
+                        </div>
+                        <div class="col m3">
+                            <input type="number">
+                            <p>harga total</p>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+                </div>
             </div>
 
         </main>

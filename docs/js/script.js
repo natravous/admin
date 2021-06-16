@@ -10,9 +10,10 @@ var firebaseConfig = {
     appId: "1:412262375065:web:af929785b8e1c873e5e208",
     measurementId: "G-CQ907QF5E6"
 };
+
 // Initialize Firebase
 if(!firebase.apps.length){
-firebase.initializeApp(firebaseConfig);
+fb = firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 }
 
@@ -203,73 +204,3 @@ function logout(){
     })
 }
 
-
-// client
-const clientPesanan = ()=>{
-    var date = new Date();
-    let tanggal = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
-
-
-    database.ref(`/client/${tanggal}/pesanan/`).set();
-}
-
-
-const clientLogin = ()=>{
-    var date = new Date();
-    let namaClient = document.getElementById("nama-client").value;
-    let noMeja = document.getElementById("meja-client").value;
-    let iden = `${date.getTime()}-${noMeja}`;
-    let tanggal = `${date.getFullYear()}-${date.getMonth}-${date.getDate}`;
-
-    database.ref(`/client/${tanggal}/${iden}/pesanan/`).set(
-        {
-            id: iden,
-            meja: noMeja,
-            nama: namaClient,
-            pesanan: {}, // banyanya id menu, harga
-            total: 0, // harga
-            status: 1
-        }
-
-    ).then(window.open("/..","_self"));
-
-}
-
-
-
-
-//read
-//assign this to a function, so this function only can be triggered at spesific page
-const fetchDataClient = ()=>{
-    database.ref("/admin/menu").on("value", (dtman)=>{
-        let tampil = dtman.val();
-        var card = document.getElementById("card-menu-client");
-        let dataht = "";
-        // var kunci = document.getElementById("identitas").value = dtman.val().iden;
-        for(key in tampil){
-            let a = tampil[key].nama;
-            let b = rupiah(tampil[key].harga);
-            let c = tampil[key].deskripsi;
-            let d = tampil[key].iden;
-            let e = tampil[key].urlImg;
-            let f = tampil[key].docName;
-            dataht += `<div class="col l4 s12 m6">
-                        <div class="card">
-                            <div class="card-image bluish">
-                                <img src="${e}">
-                                <span class="card-title pgn right-align">Rp. ${b}</span>
-                            </div>
-                            <div class="card-content">
-                                <span class="card-title">${a}</span>
-                                <p>${c}</p>
-                            </div>
-                            <div class="card-action">
-                                <a class="waves-effect waves-light modal-trigger" href="#modal1" onclick="">Pesan</a>
-                            </div>
-                        </div>
-                    </div>`;
-            console.log(card);
-        }
-        card.innerHTML = dataht
-  })        
-}
